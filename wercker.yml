@@ -6,8 +6,8 @@
 box: ruby:2.2.2
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html
-#services:
-#  - wercker/postgresql
+services:
+  - wercker/postgresql
 
 # This is the build pipeline. Pipelines are the core of wercker
 # Read more about pipelines on our dev center
