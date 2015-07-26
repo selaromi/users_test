@@ -1,6 +1,6 @@
 ENV['RAILS_ENV'] = 'test'
-require 'dotenv'
-Dotenv.overload '.env.test'
+# require('dotenv').config({encoding: 'utf-8'});
+# Dotenv.overload '.env.test'
 
 require File.expand_path('../../config/environment', __FILE__)
 require 'spec_helper'
