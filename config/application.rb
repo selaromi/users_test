@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 
 module Users
   class Application < Rails::Application
+    config.encoding = 'utf-8'
         # Found in: http://stackoverflow.com/questions/9073446/where-do-you-store-your-rails-applications-version-number
     #Let your own development environment update it for you from your latest Git tag! (which you should also be doing;)
     if Rails.env.development?
@@ -23,7 +24,6 @@ module Users
     config.generators do |g|
       g.test_framework  :rspec
     end
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
