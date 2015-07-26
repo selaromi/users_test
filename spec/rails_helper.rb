@@ -1,6 +1,8 @@
 ENV['RAILS_ENV'] = 'test'
-# require('dotenv').config({encoding: 'utf-8'});
-# Dotenv.overload '.env.test'
+
+require('dotenv')
+
+Dotenv.overload '.env.test'
 
 require File.expand_path('../../config/environment', __FILE__)
 require 'spec_helper'
@@ -17,9 +19,5 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
   end
 end
