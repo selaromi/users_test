@@ -1,56 +1,35 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  # Authentication, taken from https://gist.github.com/chrishough/6dd44fc841e80bbc2265
+  # devise_for :users, skip: [:sessions, :passwords, :confirmations, :registrations]
+  # as :user do
+    # session handling
+    # get     '/login'  => 'devise/sessions#new',     as: 'new_person_session'
+    # post    '/login'  => 'devise/sessions#create',  as: 'person_session'
+    # delete  '/logout' => 'devise/sessions#destroy', as: 'destroy_person_session'
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+    # registration
+    # get   '/join' => 'devise/registrations#new',    as: 'new_person_registration'
+    post '/users', to: 'users#create', as: 'user_registration'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+    # scope '/account' do
+      # password reset
+      # get   '/reset-password'        => 'devise/passwords#new',    as: 'new_person_password'
+      # put   '/reset-password'        => 'devise/passwords#update', as: 'person_password'
+      # post  '/reset-password'        => 'devise/passwords#create'
+      # get   '/reset-password/change' => 'devise/passwords#edit',   as: 'edit_person_password'
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+      # confirmation
+      # get   '/confirm'        => 'devise/confirmations#show',   as: 'person_confirmation'
+      # post  '/confirm'        => 'devise/confirmations#create'
+      # get   '/confirm/resend' => 'devise/confirmations#new',    as: 'new_person_confirmation'
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+      # settings & cancellation
+      # get '/cancel'   => 'devise/registrations#cancel', as: 'cancel_person_registration'
+      # get '/settings' => 'devise/registrations#edit',   as: 'edit_person_registration'
+      # put '/settings' => 'devise/registrations#update'
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+      # account deletion
+      # delete '' => 'devise/registrations#destroy'
+    # end
+  # end
 end

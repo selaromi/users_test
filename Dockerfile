@@ -13,15 +13,10 @@ RUN bundle install
 # This will now install anything in Gemfile.tip
 # This way you can add new gems without rebuilding _everything_ to add 1 gem
 # Anything that was already installed from the main Gemfile will be re-used
-ADD Gemfile.tip $APP_HOME/
-RUN bundle install
-
-# Add rake and its dependencies
-ADD config $APP_HOME/config
-ADD Rakefile $APP_HOME/
+# ADD Gemfile.tip $APP_HOME/
+# RUN bundle install
 
 ADD . $APP_HOME
 
 ENV PATH $APP_HOME/bin:$PATH
-ENTRYPOINT ["$APP_HOME/bin/rails"]
-CMD ["server","-b","0.0.0.0"]
+ENTRYPOINT bundle exec rails s -e docker -b 0.0.0.0

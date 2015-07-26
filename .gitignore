@@ -24,7 +24,7 @@
 Rakefile
 
 # Ignore .env files
-.env*
+.env.local
 
 # Ignore pact example code
 spec/_pact_helper_example.rb
