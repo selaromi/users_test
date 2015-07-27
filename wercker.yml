@@ -7,27 +7,26 @@ box: ruby:2.2.2
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html
 services:
-    - wercker/postgresql
+   - id: postgres
+     env:
+       POSTGRES_PASSWORD: ourlittlesecret
 
 # This is the build pipeline. Pipelines are the core of wercker
 # Read more about pipelines on our dev center
 # http://devcenter.wercker.com/docs/pipelines/index.html
 build:
     steps:
-        - bundle-install
-        - rails-database-yml:
-            service: postgresql
         - script:
             name: echo ruby information
             code: |
                 echo "ruby version $(ruby --version) running!"
                 echo "from location $(which ruby)"
                 echo -p "gem list: $(gem list)"
-
+        - bundle-install
+        - rails-database-yml
         - script:
             name: Set up db
             code: bundle exec rake db:schema:load RAILS_ENV=test
-
         - script:
             name: rspec
             code: bundle exec rspec
