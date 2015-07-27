@@ -2,10 +2,13 @@ require_relative '../../app/errors/custom_errors'
 
 class User < ActiveRecord::Base
   include GenerateRelatedResources
+
+  VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+
   devise :database_authenticatable, :registerable,
          :recoverable, :trackable, :validatable
   validates :username, presence: true, uniqueness: true
-  # validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :password, presence: true
   has_many :roles, through: :user_roles
   has_many :user_roles, dependent: :destroy
